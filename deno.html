@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default/easyui.css">
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>  
+    <script type="text/javascript" src="js/angular.js"></script>  
+    <script type="text/javascript" src="js/angular-route.js"></script> 
+    <link rel="stylesheet" href="css/demo.css">
+</head>
+
+<body>
+<div class="g-content">
+    <div class="g-top">
+        <div class="u-logo"></div>
+        <ul class="g-tmenu">
+                <li class="act"> <a href="javascript:void(0)">功能演示1</a></li>
+                <li> <a href="javascript:void(0)">功能演示2</a></li>
+                <li> <a href="javascript:void(0)">功能演示3</a></li>
+                <li> <a href="javascript:void(0)">功能演示4</a></li>
+                <div class="clear"></div>
+        </ul>
+        <ul class="g-tr">
+                
+                                <li class="u-btn-sech"> 
+                    <i class="glyphicon glyphicon-search"> 
+                        
+                    </i> 
+                    <div class="u-sbox"><input type="text" placeholder="搜索内容"> </div>
+                </li>  
+
+                <li> <i class="glyphicon glyphicon-bell"></i> </li>
+                 <li class="u-btnd">  <span class="u-bsa">demo</span>  <i class="glyphicon glyphicon-menu-down"></i> 
+                    <div class="u-dm">
+
+                    </div>
+                </li>
+        </ul>
+    </div>
+    <div class="g-bottom">
+        <div class="g-menu" ng-app="myApp" ng-controller="myCtrl">
+            <div class="u-menus">
+                            <!-- 菜单一 -->
+                             <div class="m-lmenu" >
+                                            <ul class="u-fmu" ng-repeat="list in menuList" menu="" ng-init="m2=list.menu">
+                                                <li class="u-listone" >
+                                                    <a href="javascript:void(0)" title="一级" listurl="{{list.url}}" menu="{{list.menu}}" class="u-fast-btn u-listbtn"> <i class="glyphicon glyphicon-folder-open"></i>{{list.text}}  <span class="u-bfm"><i class="glyphicon glyphicon-menu-left"></i> </span></a>
+                                                    <ul class="u-second">
+                                                        <li ng-repeat="list2 in m2 track by $index" ng-init="m3=list2.menu">
+                                                           
+                                                            <a href="javascript:void(0)" class="u-secont-btn" listurl="{{list2.url}}" menu="{{list2.menu}}" > <span ng-show="{{list2.menu}}"><i class="glyphicon glyphicon-menu-right"></i></span> {{list2.text2}}</a>
+                                                            <ul class="u-second u-list-third" >                                                               
+                                                                 <li  ng-repeat="list3 in m3" ng-init="m4=list3.menu">
+                                                                     <a href="javascript:void(0);" class="u-third-btn" menu="{{list3.menu}}" listurl="{{list3.url}}"><div class="u-mul"> <span ng-show="{{list3.menu}}"><i class="glyphicon glyphicon-menu-right" ></span></i><span>{{list3.text3}}</span></div> </a>
+                                                                     <ul class="u-foutth">
+                                                                          <li ng-repeat="list4 in m4">
+                                                                               <a href="javascript:void(0);"  class="u-last" listurl="{{list4.url}}"><div class="u-mull"><i class="glyphicon u-sectb"></i><span>{{list4.text3}}</span></div> </a> 
+                                                                          </li>
+                                                                    </ul>
+                                                                </li> 
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>  
+                                            </ul>
+                              </div> 
+            </div>
+                            <!-- 菜单二 -->
+            <div class="u-menus">
+                    4554
+            </div>
+                <!-- 菜单三 -->
+            <div class="u-menus">
+                    544554
+            </div>
+                <!-- 菜单四 -->
+            <div class="u-menus">
+                    5418
+            </div>
+        </div>
+        <div class="g-rc">
+                    <div id="tt" class="easyui-tabs"  data-options="tools:'#tab-tools',fit:true,narrow:true"  >   
+                        <div title=" 首页" data-options="iconCls:'icon-home',fit:true" class="glyphicon glyphicon-home" style="padding:20px;display:none;">   
+                            tab1    
+                        </div>   
+                    </div> 
+                    <div id="tab-tools">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-oth'" onclick="addPanel()"></a>                           
+                    </div>
+        </div>
+    </div>
+</div>
+<script>
+//菜单影藏
+    function menup(){
+        $(".icon-home").click(
+            function(){
+                var d=$(".g-menu").css("display");
+                if(d=="block"){
+                    $(".g-menu").css("display","none");
+                    $(".g-rc").css("left","0")
+                    $("#tt").tabs("resize");
+                }else{
+                    $(".g-menu").css("display","block");
+                    $(".g-rc").css("left","230px")
+                    $("#tt").tabs("resize");
+                }
+            }
+        )
+
+    }
+
+    //菜单切换
+    $(".g-tmenu  li").each(function(){
+         var index=$(this).index();
+         $("g-tmenu li:first").addClass("act");
+         
+         $(".u-menus").eq(0).css("display","block");
+         $(this).click(function(){
+             $(this).addClass("act").siblings().removeClass("act");
+             $(".u-menus").eq(index).css("display","block").siblings().css("display","none");
+         });
+    });
+</script>
+<script>
+
+
+
+        $(function(){
+            openlist1()
+            openlist2();
+            openlist3()
+            listfn();
+            menup();
+
+        })
+
+
+        //第三级菜单
+         function openlist3(){
+           
+            console.log('openlist2()');
+            $(".u-third-btn").each(function(){
+                console.log(1111);
+               var off=false;
+                $(this).click(function(){
+                    //获取此时的自定义属性url
+                    var menu=$(this).attr("menu");
+                    if(!menu){
+                       $(this).children("i").addClass("glyphicon-menu-down");
+                    }
+                    var  url=$(this).attr("listurl");
+                    console.log(url);
+                    var d= $(this).next().css("display")
+                    $(this).children().children().children("i").removeClass("glyphicon-menu-right").addClass("glyphicon-menu-down");
+                    if(d=="none"||d=="inline"){
+                        $(this).next().css("display","block");
+                        $(this).children().children().children("i").removeClass("glyphicon-menu-right").addClass("glyphicon-menu-down");
+                        // $(this).children("i").removeClass("u-addt").addClass("u-glbottom");
+                        $(".f-focus2").removeClass("f-focus2");
+                        $(this).addClass("f-focus2");
+
+                        off=true;
+                    }
+                    else{
+                        $(this).next().css("display","none");
+                        $(this).children().children().children("i").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-right");
+                         $(this).children("i").removeClass("u-glbottom").addClass("u-addt");
+                        off=false;
+                    }
+                    tabadd( $(this),url);
+                    
+                })
+            });
+        }
+        function openlist2(){
+           
+            console.log('openlist2()');
+            $(".u-secont-btn").each(function(){
+               var off=false;
+                $(this).click(function(){
+                    //获取此时的自定义属性url
+                    var  url=$(this).attr("listurl");
+                    console.log(url);
+                    var d= $(this).next().css("display")
+                    if(d=="none"||d=="inline"){
+                        $(this).next().css("display","block");
+                        $(this).children().children("i").removeClass("glyphicon-menu-right").addClass("glyphicon-menu-down");
+                        // $(this).children("i").removeClass("u-addt").addClass("u-glbottom");
+                        $(".f-focus2").removeClass("f-focus2");
+                        $(this).addClass("f-focus2");
+
+                        off=true;
+                    }
+                    else{
+                        $(this).next().css("display","none");
+                         $(this).children("i").removeClass("u-glbottom").addClass("u-addt");
+                         //新修改
+                          $(this).children().children("i").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-right");
+                        off=false;
+                    }
+                    tabadd( $(this),url);
+                    
+                })
+            });
+        }
+
+        function openlist1(){
+           
+            $(".u-fast-btn").each(function(){
+               var off=false;
+                $(this).click(function(){
+                    //$(this).children("span").removeClass("glyphicon-menu-left").addClass("glyphicon-menu-down");
+                    var d= $(this).next().css("display")
+                    //获取此时的自定义属性url
+                    var  url=$(this).attr("listurl");
+                    console.log(url);
+                    if(d=="none"||d=="inline"){
+                       /// $(this).children().children("i").removeClass("glyphicon-menu-left").addClass("glyphicon-menu-down");
+                        var a = $(this).parent().parent().siblings();
+                        var b = a.children().children("ul");
+                        $(this).children().children("i").removeClass("glyphicon-menu-left").addClass("glyphicon-menu-down");
+                        $(this).next().css("display","block");    
+                        $(this).parent().parent().siblings().children().children("ul").css("display","none");
+                        
+                        $(this).siblings().children("a").css("display","none");
+                             //新修改
+                        $(this).parent().parent().siblings().children().children("a").children(".u-bfm").children("i").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-left");                  
+                        off=true;
+                        $(".f-focus1").removeClass("f-focus1");
+                        $(this).addClass("f-focus1");
+                    }
+                    else{
+                        $(this).next().css("display","none");
+                        $(this).children().children("i").removeClass("glyphicon-menu-down").addClass("glyphicon-menu-left");
+                        off=false;
+                    }
+                    tabadd( $(this),url);
+                })
+            });    
+            }; 
+            //给li添加焦点
+            function listfn(){
+                $(".u-list-third li a").each(
+                    function(){
+                        $(this).click(function(){
+                          $(".f-focus").removeClass("f-focus");
+                        $(this).addClass("f-focus");
+                        //获取此时的自定义属性url
+                        var  url=$(this).attr("listurl");
+                        console.log(url)
+                        tabadd( $(this),url); 
+
+                        })
+                    }
+                )               
+            }
+
+            // 判断是否添加tabs
+            // 获取文本
+            function tabadd(aaa,url){
+                var menu=aaa.attr("menu"); 
+                var tl=aaa.siblings().children().length;
+                
+                console.log(url);
+                var tabTitle=aaa.text()
+
+                var url=url;
+
+                // 添加
+                if ($('#tt').tabs('exists', tabTitle)) {
+                    $('#tt').tabs('select', tabTitle);
+               
+                }else{   if(!menu){
+                        
+                                $('#tt').tabs('add',{ 
+                                    
+                                    title: tabTitle,
+                                    content:"<div class='easyui-layout' fit='true'><iframe src='" + url + "' frameborder='0' style='border: 0; width: 100%; height: 100%;'></iframe></div>",
+                                    closable:true,    
+                                    tools:[{
+                                        handler:function(){
+
+                                    }    
+                                }]    
+                        });
+                    } 
+                 }
+            }
+
+
+// 菜单数据
+     var app = angular.module("myApp", ['ngRoute']);
+        
+
+        app.controller("myCtrl", function($scope) {
+
+                  $scope.menuList=[{ "id":1,"text":"主体测试","url":"javascript:void(0);","iconcls":"glyphicon u-sectb",
+                  "menu":[{"id":2,"text2":"二级","url":"javascript:void(0);","iconcls":"glyphicon u-sectb",
+                  "menu":[{"id":3,"text3":"三级10","url":"wwww.baidu.com","iconcls":"glyphicon u-sectb"},
+                  {"id":4,"text3":"三级1","url":"www.baidu.com","iconcls":"glyphicon u-sectb"},
+                  {"id":5,"text3":"三级2","url":"www.baidu.com","iconcls":"glyphicon u-sectb",}                 
+                  ]},
+                  {"id":2,"text2":"二级","url":"javascript:void(0);","iconcls":"glyphicon u-sectb",
+                  "menu":[{"id":3,"text3":"三级10","url":"www.baidu.com","iconcls":"glyphicon u-sectb"},
+                  {"id":4,"text3":"三级1","url":"www.baidu.com","iconcls":"glyphicon u-sectb"},
+                  {"id":5,"text3":"三级2","url":"www.baidu.com","iconcls":"glyphicon u-sectb","menu":[{"id":3,"text3":"四级级10","url":"www.baidu.com","iconcls":"glyphicon u-sectb"},{"id":3,"text3":"四级10","url":"www.baidu.com","iconcls":"glyphicon u-sectb"},{"id":3,"text3":"四级10","url":"www.baidu.com","iconcls":"glyphicon u-sectb"}]}]}]},
+                                    { "id":1,"text":"主体测试","url":"xxxx","iconcls":"glyphicon u-sectb","menu":[{"id":2,"text2":"二级1","url":"xxxx","iconcls":"glyphicon u-sectb"}]},
+                                    { "id":1,"text":"主体测试","url":"xxxx","iconcls":"glyphicon u-sectb","menu":[{"id":2,"text2":"二级11","url":"xxxx","iconcls":"glyphicon u-sectb"}]},
+                                    { "id":1,"text":"主体测试","url":"xxxx","iconcls":"glyphicon u-sectb","menu":[{"id":2,"text2":"二级2","url":"xxxx","iconcls":"glyphicon u-sectb"}]},
+                                    { "id":1,"text":"主体测试","url":"xxxx","iconcls":"glyphicon u-sectb","menu":[{"id":2,"text2":"二级3","url":"xxxx","iconcls":"glyphicon u-sectb","menu":[{"id":3,"text3":"三级","url":"xxxx","iconcls":"glyphicon u-sectb"}]}]},
+                                   
+                                ];
+
+
+                    console.dir($scope.menuList);
+                   
+                    $scope.tabOpen=function (a){}           
+        });
+    // 菜单结束
+
+</script>
+</body>
+</html>
